@@ -13,18 +13,68 @@ class Modulo extends React.Component {
       tempImporto: 0,
       tempTasso: 0,
       tempDurata: 0,
+      errorMessage: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     this.setState({
-      importo: this.state.tempImporto,
-      tasso: this.state.tempTasso,
-      durata: this.state.tempDurata
+      errorMessage: ''
     })
+    e.preventDefault();
+
+    // input validation
+    // check for European number format
+    if (this.state.tempImporto.indexOf(',') > -1) {
+      this.setState({
+        tempImporto: this.state.tempImporto.splice(this.state.tempImporto.indexOf(','), 1 , '.')
+      })
+    }
+    if (this.state.tempTasso.indexOf(',') > -1) {
+      var currentInput = this.state.tempTasso;
+      var currentInputArray = currentInput.split('');
+      console.log('currentInputArray ', currentInputArray)
+      currentInputArray.splice(this.state.tempTasso.indexOf(','), 1 ,'.')
+      var newInput = currentInputArray.join('');
+      console.log('newInput ', newInput)
+      console.log('this.state.tempTasso ', this.state.tempTasso)
+      console.log('hello1 ')
+      this.setState({
+        errorMessage: 'hi from here',
+        tempTasso: 100
+      })
+      console.log('hello2 ')
+      console.log('this.state', this.state);
+    }
+    if (this.state.tempDurata.indexOf(',') > -1) {
+      this.setState({
+        tempDurata: this.state.tempDurata.splice(this.state.tempDurata.indexOf(','), 1 ,'.')
+      })
+    }
+    // check if not a number has been inputted
+    if ( isNaN(this.state.tempImporto) || isNaN(this.state.tempTasso) || isNaN(this.state.tempDurata) ) {
+      console.log('Not a number')
+      this.setState({
+        errorMessage: 'tutti gli input devono essere numerici'
+      })
+    }
+    // check if numbers have been included with comma decimals
+      else {
+
+
+        // now update everything and render
+        this.setState({
+          importo: this.state.tempImporto,
+          tasso: this.state.tempTasso,
+          durata: this.state.tempDurata
+        })
+      }
+
+
+
+
     console.log('this.state', this.state);
   }
 
@@ -57,7 +107,10 @@ class Modulo extends React.Component {
                 name='tempDurata'
                 onChange={this.handleInputChange}/>
           </Form.Field>
-          <Button content='Calcola Mutuo' primary type='submit'/>
+          <div style={{display: 'flex', alignItems: 'center'}}>
+            <Button content='Calcola Mutuo' primary type='submit'/>
+            <div>{this.state.errorMessage}</div>
+          </div>
         </Form>
         <Results mutuo={this.state}/>
       </div>
