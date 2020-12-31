@@ -1,0 +1,36 @@
+{
+  "name": "mutuo-facile",
+  "version": "1.0.0",
+  "description": "a collection of tools to help through the home buying process",
+  "main": "/server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react-dev": "webpack --watch --mode development",
+    "server-dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbesio/mutuo-facile.git"
+  },
+  "author": "Matteo B",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbesio/mutuo-facile/issues"
+  },
+  "homepage": "https://github.com/mbesio/mutuo-facile#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0",
+    "webpack-dev-server": "^3.11.1"
+  }
+}
