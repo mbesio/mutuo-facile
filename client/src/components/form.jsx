@@ -1,20 +1,24 @@
 import React from 'react'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 
+
+
+
 const Modulo = () => (
-  <Form>
+  <Form style={{margin: '4em'}} >
     <Form.Field>
-      <label>First Name</label>
-      <input placeholder='First Name' />
+      <label>Importo (Amount) (€)</label>
+      <input placeholder='200.000' />
     </Form.Field>
     <Form.Field>
-      <label>Last Name</label>
-      <input placeholder='Last Name' />
+      <label>Tasso d'interesse (Interest Rate) (%)</label>
+      <input placeholder='2,0%' />
     </Form.Field>
     <Form.Field>
-      <Checkbox label='I agree to the Terms and Conditions' />
+      <label>Durata (Duration) (Anni)</label>
+      <input placeholder='30' />
     </Form.Field>
-    <Button type='submit'>Submit</Button>
+    <Button content='Calcola Mutuo' primary type='submit'/>
   </Form>
 )
 
