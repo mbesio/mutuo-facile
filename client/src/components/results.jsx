@@ -20,10 +20,10 @@ var Results = (props) => {
   return (
     <div>
       <Grid divided='vertically' style={{marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
-      <div style={{fontSize: '250%'}}>Riepilogo e risultati</div>
+      <div style={{fontSize: '250%'}}>Riepilogo</div>
         <Grid.Row columns={2}>
           <Grid.Column>
-            <div style={{fontSize: '150%'}}>Riepilogo parametri mutuo</div>
+            <div style={{fontSize: '150%'}}>Parametri</div>
             <div style={{display: 'flex', alignItems: 'center'}}>
               <AiFillBank style={{margin: '0.4em'}} />
               <NumberFormat value={props.mutuo.importo} displayType={'text'} thousandSeparator={true} prefix={'€'} />

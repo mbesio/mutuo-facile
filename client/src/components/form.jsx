@@ -9,7 +9,10 @@ class Modulo extends React.Component {
     this.state = {
       importo: 200000,
       tasso: 2.0,
-      durata: 30
+      durata: 30,
+      tempImporto: 0,
+      tempTasso: 0,
+      tempDurata: 0,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -17,7 +20,11 @@ class Modulo extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('the value has been clicked e', e.target);
+    this.setState({
+      importo: this.state.tempImporto,
+      tasso: this.state.tempTasso,
+      durata: this.state.tempDurata
+    })
     console.log('this.state', this.state);
   }
 
@@ -34,20 +41,20 @@ class Modulo extends React.Component {
           <Form.Field>
             <label>Importo (Amount) (€)</label>
               <input
-                name='importo'
+                name='tempImporto'
                 placeholder='200.000'
                 onChange={this.handleInputChange}/>
           </Form.Field>
           <Form.Field>
             <label>Tasso d'interesse (Interest Rate) (%)</label>
               <input placeholder='2,0%'
-                name='tasso'
+                name='tempTasso'
                 onChange={this.handleInputChange}/>
           </Form.Field>
           <Form.Field>
             <label>Durata (Duration) (Anni)</label>
               <input placeholder='30'
-                name='durata'
+                name='tempDurata'
                 onChange={this.handleInputChange}/>
           </Form.Field>
           <Button content='Calcola Mutuo' primary type='submit'/>
