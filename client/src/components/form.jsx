@@ -3,6 +3,8 @@ import { Button, Checkbox, Form } from 'semantic-ui-react';
 
 import Results from './results.jsx';
 
+import inputValidation from '../lib/inputvalidation.js';
+
 class Modulo extends React.Component {
   constructor (props) {
     super (props);
@@ -20,63 +22,14 @@ class Modulo extends React.Component {
   }
 
   handleSubmit(e) {
-    this.setState({
-      errorMessage: ''
-    })
     e.preventDefault();
 
-    // input validation
-    // check for European number format
-    if (this.state.tempImporto.indexOf(',') > -1) {
       this.setState({
-        tempImporto: this.state.tempImporto.splice(this.state.tempImporto.indexOf(','), 1 , '.')
+        importo: this.state.tempImporto,
+        tasso: this.state.tempTasso,
+        durata: this.state.tempDurata
       })
     }
-    if (this.state.tempTasso.indexOf(',') > -1) {
-      var currentInput = this.state.tempTasso;
-      var currentInputArray = currentInput.split('');
-      console.log('currentInputArray ', currentInputArray)
-      currentInputArray.splice(this.state.tempTasso.indexOf(','), 1 ,'.')
-      var newInput = currentInputArray.join('');
-      console.log('newInput ', newInput)
-      console.log('this.state.tempTasso ', this.state.tempTasso)
-      console.log('hello1 ')
-      this.setState({
-        errorMessage: 'hi from here',
-        tempTasso: 100
-      })
-      console.log('hello2 ')
-      console.log('this.state', this.state);
-    }
-    if (this.state.tempDurata.indexOf(',') > -1) {
-      this.setState({
-        tempDurata: this.state.tempDurata.splice(this.state.tempDurata.indexOf(','), 1 ,'.')
-      })
-    }
-    // check if not a number has been inputted
-    if ( isNaN(this.state.tempImporto) || isNaN(this.state.tempTasso) || isNaN(this.state.tempDurata) ) {
-      console.log('Not a number')
-      this.setState({
-        errorMessage: 'tutti gli input devono essere numerici'
-      })
-    }
-    // check if numbers have been included with comma decimals
-      else {
-
-
-        // now update everything and render
-        this.setState({
-          importo: this.state.tempImporto,
-          tasso: this.state.tempTasso,
-          durata: this.state.tempDurata
-        })
-      }
-
-
-
-
-    console.log('this.state', this.state);
-  }
 
   handleInputChange(e) {
     this.setState({
