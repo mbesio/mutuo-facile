@@ -4,7 +4,6 @@ import { AiFillBank, AiOutlinePercentage } from 'react-icons/ai';
 import { ImCalendar } from 'react-icons/im';
 import NumberFormat from 'react-number-format';
 
-import SummaryTable from './summaryTable.jsx';
 
 import monthlyInstallment from '../lib/installment.js';
 
@@ -58,7 +57,6 @@ var Results = (props) => {
           </Grid.Row>
         </Grid>
       </div>
-      <SummaryTable mutuo = {props.mutuo}/>
     </div>
   )
 }

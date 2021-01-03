@@ -24,9 +24,9 @@ var SummaryTable = (props) => {
   ]
 
   return (
-    <div>
-    <div style={{fontSize: '200%', paddingBottom: '15px', marginTop: '1em', marginRight: '4em', marginLeft: '2.8em'}}>Simulazione rata: Durata vs. Tasso</div>
-     <Table definition style={{paddingBottom: '15px', marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
+    <div style={{marginRight: '4em', marginLeft: '2.8em', paddingLeft: '10em', paddingRight: '10em'}}>
+    <div style={{fontSize: '200%', marginBottom:'1em'}}>Simulazione rata: Durata vs. Tasso</div>
+     <Table definition style={{ marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell />
@@ -51,6 +51,7 @@ var SummaryTable = (props) => {
           })}
       </Table.Body>
     </Table>
+    <div style={{padding: '1.0em', backgroundColor: 'white'}}></div>
   </div>
   )
 }
