@@ -57,21 +57,21 @@ class Modulo extends React.Component {
         <div style={{fontSize: '200%', paddingBottom: '5px', marginTop: '1em', marginRight: '4em', marginLeft: '2.8em'}}>Modifica parametri mutuo</div>
         <Form style={{marginTop: '1.5em', marginBottom: '4em', marginLeft: '4em', marginRight: '30em'}} onSubmit={this.handleSubmit}>
           <Form.Field>
-            <label>Importo (Amount) (€)</label>
+            <label>Importo (€)</label>
               <input
                 name='tempImporto'
                 defaultValue={this.state.tempImporto}
                 onChange={this.handleInputChange}/>
           </Form.Field>
           <Form.Field>
-            <label>Tasso d'interesse (Interest Rate) (%)</label>
+            <label>Tasso d'interesse (%)</label>
               <input
                 defaultValue={this.state.tempTasso}
                 name='tempTasso'
                 onChange={this.handleInputChange}/>
           </Form.Field>
           <Form.Field>
-            <label>Durata (Duration) (Anni)</label>
+            <label>Durata (anni)</label>
               <input
                 defaultValue={this.state.tempDurata}
                 name='tempDurata'
