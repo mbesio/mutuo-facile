@@ -56,7 +56,7 @@ var Results = (props) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <SummaryTable/>
+      <SummaryTable mutuo = {props.mutuo}/>
     </div>
   )
 }

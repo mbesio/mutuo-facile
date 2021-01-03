@@ -1,93 +1,58 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react';
+import NumberFormat from 'react-number-format';
 
+import monthlyInstallment from '../lib/installment.js';
 
-var SummaryTable = () => {
+var SummaryTable = (props) => {
+  var importo = props.mutuo.importo;
+  var durata = props.mutuo.durata;
+  var midTasso = props.mutuo.tasso;
+  var years = [15, 20, 25, 30, 35, 40];
+  var tassi = [
+    midTasso - 0.5,
+    midTasso - 0.4,
+    midTasso - 0.3,
+    midTasso - 0.2,
+    midTasso - 0.1,
+    midTasso,
+    midTasso + 0.1,
+    midTasso + 0.2,
+    midTasso + 0.3,
+    midTasso + 0.4,
+    midTasso + 0.5
+  ]
+
   return (
     <div>
-    <div style={{fontSize: '200%', paddingBottom: '15px'}}>Simulazione rata: Durata vs. Tasso</div>
-     <Table definition>
+    <div style={{fontSize: '200%', paddingBottom: '15px', marginTop: '1em', marginRight: '4em', marginLeft: '2.8em'}}>Simulazione rata: Durata vs. Tasso</div>
+     <Table definition style={{paddingBottom: '15px', marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell />
-          <Table.HeaderCell>15 anni</Table.HeaderCell>
-          <Table.HeaderCell>20 anni</Table.HeaderCell>
-          <Table.HeaderCell>25 anni</Table.HeaderCell>
-          <Table.HeaderCell>30 anni</Table.HeaderCell>
-          <Table.HeaderCell>35 anni</Table.HeaderCell>
-          <Table.HeaderCell>40 anni</Table.HeaderCell>
+          {years.map( (year) => {
+            return <Table.HeaderCell key={year}>{`${year} anni`}</Table.HeaderCell>
+          })}
         </Table.Row>
       </Table.Header>
 
       <Table.Body>
-        <Table.Row>
-          <Table.Cell>1.0%</Table.Cell>
-          <Table.Cell>1000</Table.Cell>
-          <Table.Cell>1100</Table.Cell>
-          <Table.Cell>1200</Table.Cell>
-          <Table.Cell>1300</Table.Cell>
-          <Table.Cell>1400</Table.Cell>
-          <Table.Cell>1500</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>1.2%</Table.Cell>
-          <Table.Cell>1000</Table.Cell>
-          <Table.Cell>1100</Table.Cell>
-          <Table.Cell>1200</Table.Cell>
-          <Table.Cell>1300</Table.Cell>
-          <Table.Cell>1400</Table.Cell>
-          <Table.Cell>1500</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>1.4%</Table.Cell>
-          <Table.Cell>1000</Table.Cell>
-          <Table.Cell>1100</Table.Cell>
-          <Table.Cell>1200</Table.Cell>
-          <Table.Cell>1300</Table.Cell>
-          <Table.Cell>1400</Table.Cell>
-          <Table.Cell>1500</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>1.6%</Table.Cell>
-          <Table.Cell>1000</Table.Cell>
-          <Table.Cell>1100</Table.Cell>
-          <Table.Cell>1200</Table.Cell>
-          <Table.Cell>1300</Table.Cell>
-          <Table.Cell>1400</Table.Cell>
-          <Table.Cell>1500</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>1.8%</Table.Cell>
-          <Table.Cell>1000</Table.Cell>
-          <Table.Cell>1100</Table.Cell>
-          <Table.Cell>1200</Table.Cell>
-          <Table.Cell>1300</Table.Cell>
-          <Table.Cell>1400</Table.Cell>
-          <Table.Cell>1500</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>2.0%</Table.Cell>
-          <Table.Cell>1000</Table.Cell>
-          <Table.Cell>1100</Table.Cell>
-          <Table.Cell>1200</Table.Cell>
-          <Table.Cell>1300</Table.Cell>
-          <Table.Cell>1400</Table.Cell>
-          <Table.Cell>1500</Table.Cell>
-        </Table.Row>
+        {
+          tassi.map( (tassi) => {
+            return (
+              <Table.Row key = {tassi}>
+                <Table.Cell>{(tassi).toFixed(2) + '%' }</Table.Cell>
+                {years.map( (year) => {
+                  return <Table.Cell key={year}><NumberFormat value={Math.round(monthlyInstallment(importo, tassi, year))} displayType={'text'} thousandSeparator={true} prefix={'€'} /></Table.Cell>
+                })}
+            </Table.Row>
+            )
+
+          })}
       </Table.Body>
     </Table>
   </div>
-
   )
 }
 
 export default SummaryTable;
-
-
-
-
-
-
-
-
-
