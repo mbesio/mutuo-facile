@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Header from './components/header.jsx';
 import Modulo from './components/form.jsx';
 
 var App = () => {
   return(
     <div>
-      <div>Hello from Mutuo Facile</div>
+      <Header/>
       <Modulo/>
     </div>
   )
