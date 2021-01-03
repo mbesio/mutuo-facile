@@ -54,7 +54,8 @@ class Modulo extends React.Component {
   render() {
     return(
       <div>
-        <Form style={{margin: '4em', marginRight: '20em'}} onSubmit={this.handleSubmit}>
+        <div style={{fontSize: '200%', paddingBottom: '5px', marginTop: '1em', marginRight: '4em', marginLeft: '2.8em'}}>Modifica parametri mutuo</div>
+        <Form style={{marginTop: '1.5em', marginBottom: '4em', marginLeft: '4em', marginRight: '30em'}} onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Importo (Amount) (€)</label>
               <input
@@ -77,7 +78,7 @@ class Modulo extends React.Component {
                 onChange={this.handleInputChange}/>
           </Form.Field>
           <div style={{display: 'flex', alignItems: 'center'}}>
-            <Button content='Calcola Mutuo' primary type='submit'/>
+            <Button content='Calcola Rata' primary type='submit'/>
             <div style={{color: 'red'}}>{this.state.errorMessage}</div>
           </div>
         </Form>
