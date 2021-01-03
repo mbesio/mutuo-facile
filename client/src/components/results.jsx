@@ -12,7 +12,7 @@ var Results = (props) => {
   var totalCost = installment * 12 * props.mutuo.durata;
   var interestPercentage = (totalCost - props.mutuo.importo) / totalCost * 100;
 
-  var totalCostDisplay = Math.round(totalCost);
+  var totalCostDisplay = totalCost.toFixed(2);
   var interestPercentageDisplay = interestPercentage.toFixed(1);
 
 
@@ -20,7 +20,7 @@ var Results = (props) => {
   return (
     <div>
       <Grid divided='vertically' style={{marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
-      <div style={{fontSize: '250%'}}>Riepilogo</div>
+      <div style={{fontSize: '250%', paddingBottom: '15px'}}>Riepilogo</div>
         <Grid.Row columns={2}>
           <Grid.Column>
             <div style={{fontSize: '150%'}}>Parametri</div>

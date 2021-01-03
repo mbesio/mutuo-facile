@@ -26,7 +26,7 @@ const inputValidation = {
       }
   },
   // check if the input is a valid number
-  convertValidStringToNumber(inputString) {
+  isInputValid(inputString) {
     if ( isNaN(inputString) ) {
       return false;
     } else {
