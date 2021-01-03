@@ -11,7 +11,6 @@ class Footer extends React.Component{
   }
 
   toggleFeedback() {
-    console.log('hello')
     this.setState({
       isHover: !this.state.isHover
     })
