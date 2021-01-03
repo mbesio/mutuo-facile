@@ -21,8 +21,8 @@ var Results = (props) => {
 
   return (
     <div>
+      <div style={{fontSize: '200%', paddingBottom: '5px', marginTop: '1em', marginRight: '4em', marginLeft: '2.8em'}}>Riepilogo</div>
       <Grid divided='vertically' style={{marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
-      <div style={{fontSize: '250%', paddingBottom: '15px'}}>Riepilogo</div>
         <Grid.Row columns={2}>
           <Grid.Column>
             <div style={{fontSize: '150%'}}>Parametri</div>
