@@ -21,41 +21,43 @@ var Results = (props) => {
 
   return (
     <div>
-      <div style={{fontSize: '200%', paddingBottom: '5px', marginTop: '1em', marginRight: '4em', marginLeft: '2.8em'}}>Riepilogo</div>
-      <Grid divided='vertically' style={{marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <div style={{fontSize: '150%'}}>Parametri</div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <AiFillBank style={{margin: '0.4em'}} />
-              <NumberFormat value={props.mutuo.importo} displayType={'text'} thousandSeparator={true} prefix={'€'} />
-            </div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <AiOutlinePercentage style={{margin: '0.4em'}} />
-              <div>{props.mutuo.tasso}%</div>
-            </div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <ImCalendar style={{margin: '0.4em'}}/>
-              <div>{props.mutuo.durata} anni</div>
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            <div style={{fontSize: '150%'}}>Risultato</div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <div style={{margin: '0.4em'}}>Rata:</div>
-              <NumberFormat value={installment} displayType={'text'} thousandSeparator={true} prefix={'€'} />
-            </div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <div style={{margin: '0.4em'}}>Costo totale (Capitale + Interessi)</div>
-              <NumberFormat value={totalCostDisplay} displayType={'text'} thousandSeparator={true} prefix={'€'} />
-            </div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <div style={{margin: '0.4em'}}>Quota interessi (% totale costo mutuo)</div>
-              <div>{interestPercentageDisplay}%</div>
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <div style={{paddingTop: '5px', backgroundColor: '#e0edff'}}>
+        <div style={{fontSize: '200%', paddingBottom: '5px', marginTop: '1em', marginRight: '4em', marginLeft: '2.8em'}}>Riepilogo</div>
+        <Grid divided='vertically' style={{marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+              <div style={{fontSize: '150%'}}>Parametri</div>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <AiFillBank style={{margin: '0.4em'}} />
+                <NumberFormat value={props.mutuo.importo} displayType={'text'} thousandSeparator={true} prefix={'€'} />
+              </div>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <AiOutlinePercentage style={{margin: '0.4em'}} />
+                <div>{props.mutuo.tasso}%</div>
+              </div>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <ImCalendar style={{margin: '0.4em'}}/>
+                <div>{props.mutuo.durata} anni</div>
+              </div>
+            </Grid.Column>
+            <Grid.Column>
+              <div style={{fontSize: '150%'}}>Risultato</div>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <div style={{margin: '0.4em'}}>Rata:</div>
+                <NumberFormat value={installment} displayType={'text'} thousandSeparator={true} prefix={'€'} />
+              </div>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <div style={{margin: '0.4em'}}>Costo totale (Capitale + Interessi)</div>
+                <NumberFormat value={totalCostDisplay} displayType={'text'} thousandSeparator={true} prefix={'€'} />
+              </div>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <div style={{margin: '0.4em'}}>Quota interessi (% totale costo mutuo)</div>
+                <div>{interestPercentageDisplay}%</div>
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
       <SummaryTable mutuo = {props.mutuo}/>
     </div>
   )
