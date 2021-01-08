@@ -56,10 +56,10 @@ class Modulo extends React.Component {
     return(
       <div>
         <div style={{paddingTop: '1.0em', backgroundColor: 'white'}}></div>
-        <div style={{display: 'flex', justifyContent: 'center', marginLeft: '5%', marginRight: '5%'}}>
-          <div>
-            <div style={{fontSize: '200%', paddingBottom: '5px', marginRight: '5%'}}>Modifica parametri mutuo</div>
-            <Form style={{marginTop: '1.5em', marginBottom: '4em', marginRight: '10em'}} onSubmit={this.handleSubmit}>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div style={{width: '30%', marginRight: '10%'}}>
+            <div style={{fontSize: '200%', paddingBottom: '5px', marginRight: '1%', marginTop: '0.5em'}}>Modifica parametri mutuo</div>
+            <Form style={{marginTop: '1.5em', marginBottom: '4em', marginRight: '5%'}} onSubmit={this.handleSubmit}>
               <Form.Field>
                 <label>Importo (€)</label>
                   <input

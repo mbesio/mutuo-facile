@@ -20,11 +20,10 @@ var Results = (props) => {
 
   return (
     <div>
-      <div style={{paddingTop: '5px', backgroundColor: '#e0edff'}}>
-        <div style={{fontSize: '200%', paddingBottom: '5px', marginTop: '1em', marginRight: '4em', marginLeft: '2.8em'}}>Riepilogo</div>
-        <Grid divided='vertically' style={{marginTop: '1em', marginRight: '4em', marginLeft: '4em'}}>
-          <Grid.Row columns={2}>
-            <Grid.Column>
+      <div style={{ width: '100%', height:'100%', paddingTop: '5px', paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#e0edff'}}>
+        <div style={{fontSize: '200%', paddingBottom: '5px', marginTop: '0.5em'}}>Riepilogo</div>
+        <div style={{marginTop: '1em', display: 'flex', flexDirection: 'row'}}>
+            <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-between',marginTop: '5%', marginBottom: '1%', marginRight: '10%'}}>
               <div style={{fontSize: '150%'}}>Parametri</div>
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <AiFillBank style={{margin: '0.4em'}} />
@@ -38,24 +37,23 @@ var Results = (props) => {
                 <ImCalendar style={{margin: '0.4em'}}/>
                 <div>{props.mutuo.durata} anni</div>
               </div>
-            </Grid.Column>
-            <Grid.Column>
+            </div>
+            <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-between', marginTop: '5%', marginBottom: '1%', marginRight: '2%'}}>
               <div style={{fontSize: '150%'}}>Risultato</div>
-              <div style={{display: 'flex', alignItems: 'center'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
                 <div style={{margin: '0.4em'}}>Rata:</div>
-                <NumberFormat value={installment} displayType={'text'} thousandSeparator={true} prefix={'€'} />
+                <NumberFormat style={{fontSize: '200%'}} value={installment} displayType={'text'} thousandSeparator={true} prefix={'€'} />
               </div>
-              <div style={{display: 'flex', alignItems: 'center'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
                 <div style={{margin: '0.4em'}}>Costo totale (Capitale + Interessi)</div>
                 <NumberFormat value={totalCostDisplay} displayType={'text'} thousandSeparator={true} prefix={'€'} />
               </div>
-              <div style={{display: 'flex', alignItems: 'center'}}>
+              <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
                 <div style={{margin: '0.4em'}}>Quota interessi (% totale costo mutuo)</div>
                 <div>{interestPercentageDisplay}%</div>
               </div>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+            </div>
+        </div>
       </div>
     </div>
   )
