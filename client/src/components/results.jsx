@@ -19,12 +19,12 @@ var Results = (props) => {
 
 
   return (
-    <div>
-      <div style={{ width: '100%', height:'100%', paddingTop: '5px', paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#e0edff'}}>
-        <div style={{fontSize: '200%', paddingBottom: '5px', marginTop: '0.5em'}}>Riepilogo</div>
-        <div style={{marginTop: '1em', display: 'flex', flexDirection: 'row'}}>
-            <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-between',marginTop: '5%', marginBottom: '1%', marginRight: '10%'}}>
-              <div style={{fontSize: '150%'}}>Parametri</div>
+    <div style={{ width: '30%'}}>
+      <div style={{ width: '100%', height:'80%', paddingTop: '5px', paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#e0edff'}}>
+        <div style={{fontSize: '200%', paddingBottom: '10%', marginTop: '0.5em'}}>Riepilogo</div>
+        <div style={{height:'80%', marginTop: '0', display: 'flex', flexDirection: 'row'}}>
+            <div style={{display:'flex', flexDirection: 'column', justifyContent: 'flex-start',marginTop: '1%', marginBottom: '1%', marginRight: '10%'}}>
+              <div style={{fontSize: '150%', marginBottom: '15px'}}>Parametri</div>
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <AiFillBank style={{margin: '0.4em'}} />
                 <NumberFormat value={props.mutuo.importo} displayType={'text'} thousandSeparator={true} prefix={'€'} />
@@ -38,18 +38,24 @@ var Results = (props) => {
                 <div>{props.mutuo.durata} anni</div>
               </div>
             </div>
-            <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-between', marginTop: '5%', marginBottom: '1%', marginRight: '2%'}}>
-              <div style={{fontSize: '150%'}}>Risultato</div>
+            <div style={{display:'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: '1%', marginBottom: '1%', marginRight: '2%'}}>
+              <div style={{fontSize: '150%', marginBottom: '15px'}}>Risultato</div>
               <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
                 <div style={{margin: '0.4em'}}>Rata:</div>
                 <NumberFormat style={{fontSize: '200%'}} value={installment} displayType={'text'} thousandSeparator={true} prefix={'€'} />
               </div>
               <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
-                <div style={{margin: '0.4em'}}>Costo totale (Capitale + Interessi)</div>
+                <div style={{margin: '0.4em'}}>
+                  <div>Costo totale</div>
+                  <div style={{fontSize: '75%'}}>(Capitale + Interessi)</div>
+                </div>
                 <NumberFormat value={totalCostDisplay} displayType={'text'} thousandSeparator={true} prefix={'€'} />
               </div>
               <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
-                <div style={{margin: '0.4em'}}>Quota interessi (% totale costo mutuo)</div>
+                <div style={{margin: '0.4em'}}>
+                  <div> Quota interessi</div>
+                  <div style={{fontSize: '75%'}}>(% totale costo mutuo)</div>
+                </div>
                 <div>{interestPercentageDisplay}%</div>
               </div>
             </div>
