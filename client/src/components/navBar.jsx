@@ -1,4 +1,5 @@
 import React, { useState} from 'react';
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [isBancheHovered, setBancheIsHovered] = useState(false);
@@ -19,17 +20,19 @@ const NavBar = () => {
 
   return(
     <div style={{display: 'flex', justifyContent: 'center', backgroundColor: '#2485D0', borderStyle: 'solid', borderWidth: '5px 0px 5px 0px', borderColor: 'white', color: 'white', padding: '0.5em'}}>
-      <div
+      <Link
+        to="/banche"
         style={feedbackBancheLinkStyle}
         onMouseEnter = {() => toggleHoverBanche()}
         onMouseLeave = {() => toggleHoverBanche()}
-        > Banche
-      </div>
+        >Banche
+      </Link>
       <div
         style={feedbackTassiLinkStyle}
           onMouseEnter = {() => toggleHoverTassi()}
           onMouseLeave = {() => toggleHoverTassi()}
-        > Tassi
+        >
+        Tassi
       </div>
     </div>
   )
