@@ -11,7 +11,7 @@ var Header = () => {
     setHeaderIsHovered(!isHeaderHovered);
   }
 
-  var headerLinkStyle = isHeaderHovered ? {textAlign: 'center', color: '#e0edff', cursor: 'pointer', padding: '0px 10px'} : {textAlign: 'center', color: 'white', padding: '0px 10px'}
+  var headerLinkStyle = isHeaderHovered ? {textAlign: 'center', color: '#e0edff', cursor: 'pointer'} : {textAlign: 'center', color: 'white'}
 
 
   return (

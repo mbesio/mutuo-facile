@@ -10,6 +10,7 @@ import {
 import Header from './components/header.jsx';
 import Modulo from './components/form.jsx';
 import BankLinks from './components/bankLinks.jsx';
+import InterestRateLinks from './components/interestRateLinks.jsx';
 import Footer from './components/footer.jsx';
 
 var App = () => {
@@ -19,6 +20,9 @@ var App = () => {
         <Switch>
           <Route path="/banche">
             <BankLinks/>
+          </Route>
+          <Route path="/tassi">
+            <InterestRateLinks/>
           </Route>
           <Route path="/">
             <Modulo/>

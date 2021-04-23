@@ -27,13 +27,13 @@ const NavBar = () => {
         onMouseLeave = {() => toggleHoverBanche()}
         >Banche
       </Link>
-      <div
+      <Link
+        to="/tassi"
         style={feedbackTassiLinkStyle}
-          onMouseEnter = {() => toggleHoverTassi()}
-          onMouseLeave = {() => toggleHoverTassi()}
-        >
-        Tassi
-      </div>
+        onMouseEnter = {() => toggleHoverTassi()}
+        onMouseLeave = {() => toggleHoverTassi()}
+        >Tassi
+      </Link>
     </div>
   )
 }
