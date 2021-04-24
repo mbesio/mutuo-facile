@@ -557,7 +557,7 @@ var testInput = {
 }
 
 const parseEuribor = (data) => {
-  let datesAndPrices = data.dataset.data;
+  let datesAndPrices = data.data.dataset.data;
 
   let dates = datesAndPrices.map(item => {
     return item[0];
@@ -577,3 +577,4 @@ const parseEuribor = (data) => {
 
 // var testResults = parseEuribor(testInput);
 // console.log('testResults ', testResults)
+exports.parseEuribor = parseEuribor;
