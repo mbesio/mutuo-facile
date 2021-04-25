@@ -18,7 +18,6 @@ const InterestRateLinks = () => {
 
   return (
     <div>
-      Here we will have links to InterestRates!
       <div style={{width: "80%"}}>
       <Line
         data ={{
