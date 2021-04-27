@@ -55,11 +55,10 @@ app.get('/euribor', (req, res) => {
 })
 
 
-app.get('/banche', (req, res) => {
+app.get('/banklinks', (req, res) => {
   // get information from the banks database
   Banks.find({})
     .then(data => {
-      console.log('data', data);
       res.status(200).send(data);
     })
     .catch((err) => {
