@@ -7,6 +7,9 @@ const { parseEuribor } = require('./helpers/parseEuribor.js')
 const axios = require('axios');
 const path = require('path'); // may be able to remove this
 const redis = require('redis');
+const { Banks, connectDb } = require('../database/index.js');
+console.log('Banks ', Banks)
+Banks.find()
 
 app.use(express.static('client/dist'));
 
@@ -61,6 +64,10 @@ app.get('/*', function(req, res) {
   })
 })
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-})
+
+// first connect to the mongodb and then launch the the app
+connectDb().then(() => {
+  app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+  });
+});
