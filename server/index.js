@@ -8,7 +8,6 @@ const axios = require('axios');
 const path = require('path'); // may be able to remove this
 const redis = require('redis');
 const { Banks, connectDb } = require('../database/index.js');
-console.log('Banks ', Banks)
 Banks.find()
 
 app.use(express.static('client/dist'));
@@ -48,13 +47,28 @@ app.get('/euribor', (req, res) => {
          res.status(200).send(timeSeries);
        })
        .catch((err) => {
-         console.log('there was an error', err);
+         console.log('there was an error on the euribor endpoint', err);
          res.status(400).send();
        })
     }
   })
-
 })
+
+
+app.get('/banche', (req, res) => {
+  // get information from the banks database
+  Banks.find({})
+    .then(data => {
+      console.log('data', data);
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      console.log('there was an error on the banks endpoint', err);
+      res.status(400).send();
+    })
+});
+
+
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
