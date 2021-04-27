@@ -16,19 +16,21 @@ import Footer from './components/footer.jsx';
 var App = () => {
   return(
     <Router>
-      <Header/>
-        <Switch>
-          <Route path="/banche">
-            <BankLinks/>
-          </Route>
-          <Route path="/tassi">
-            <InterestRateLinks/>
-          </Route>
-          <Route path="/">
-            <Modulo/>
-          </Route>
-        </Switch>
-      <Footer/>
+      <div style={{display: "flex", minHeight: "100vh", flexDirection: "column", justifyContent: "space-between"}}>
+        <Header/>
+          <Switch>
+            <Route path="/banche">
+              <BankLinks/>
+            </Route>
+            <Route path="/tassi">
+              <InterestRateLinks/>
+            </Route>
+            <Route path="/">
+              <Modulo/>
+            </Route>
+          </Switch>
+        <Footer/>
+      </div>
     </Router>
   )
 }
