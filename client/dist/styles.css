@@ -1,0 +1,47 @@
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.home-heading {
+  padding-top: 1em;
+  background-color: white;
+}
+
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 800px) {
+  .home-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.home-form-wrapper {
+  width: "30%";
+  margin-right: "10%";
+}
+
+.home-form-header {
+  font-size: 200%;
+  padding-bottom: 5px;
+  margin-right: 1%;
+  margin-top: 0.5em;
+}
+
+.home-form-body {
+  margin-top: 1.5em;
+  margin-bottom: 4em;
+  margin-right: 5%;
+}
+
+.home-form-button {
+  display: flex;
+  align-items: center;
+}

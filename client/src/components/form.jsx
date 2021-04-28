@@ -55,11 +55,12 @@ class Modulo extends React.Component {
   render() {
     return(
       <div>
-        <div style={{paddingTop: '1.0em', backgroundColor: 'white'}}></div>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <div style={{width: '30%', marginRight: '10%'}}>
-            <div style={{fontSize: '200%', paddingBottom: '5px', marginRight: '1%', marginTop: '0.5em'}}>Modifica parametri mutuo</div>
-            <Form style={{marginTop: '1.5em', marginBottom: '4em', marginRight: '5%'}} onSubmit={this.handleSubmit}>
+        <div className="home-heading"></div>
+        <div className="home-wrapper">
+          <div className="home-form-wrapper">
+            <div className="home-form-header">Modifica parametri mutuo</div>
+            <Form className="home-form-body"
+            onSubmit={this.handleSubmit}>
               <Form.Field>
                 <label>Importo (€)</label>
                   <input
@@ -81,7 +82,7 @@ class Modulo extends React.Component {
                     name='tempDurata'
                     onChange={this.handleInputChange}/>
               </Form.Field>
-              <div style={{display: 'flex', alignItems: 'center'}}>
+              <div className="home-form-button">
                 <Button content='Calcola Rata' primary type='submit'/>
                 <div style={{color: 'red'}}>{this.state.errorMessage}</div>
               </div>

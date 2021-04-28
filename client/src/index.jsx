@@ -16,7 +16,7 @@ import Footer from './components/footer.jsx';
 var App = () => {
   return(
     <Router>
-      <div style={{display: "flex", minHeight: "100vh", flexDirection: "column", justifyContent: "space-between"}}>
+      <div className="app-wrapper">
         <Header/>
           <Switch>
             <Route path="/banche">
