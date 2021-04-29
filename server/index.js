@@ -26,7 +26,8 @@ var job = new CronJob('00 00 00 1 * *', function() {
 job.start();
 
 
-app.get('/euribor', (req, res) => {
+app.get('/euribor', (req, res) => { // for development
+// app.get('/http://143.198.104.94:3010/euribor', (req, res) => { // for production
 
   client.get('euribor', (err, redisReply) => {
     if (redisReply) {
@@ -55,8 +56,8 @@ app.get('/euribor', (req, res) => {
 })
 
 
-app.get('/banklinks', (req, res) => {
-  // get information from the banks database
+app.get('/banklinks', (req, res) => { // for development
+//app.get('http://143.198.104.94:3010/banklinks', (req, res) => { // for production
   Banks.find({})
     .then(data => {
       res.status(200).send(data);

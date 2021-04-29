@@ -6,7 +6,8 @@ const InterestRateLinks = () => {
   const [euriborTimeSeries, setEuriborTimeSeries] = useState({});
 
   useEffect(() => {
-    axios.get('/euribor')
+    axios.get('/euribor') // for development
+    //axios.get('/http://143.198.104.94:3010/euribor') // for production
       .then( (updatedEuriborTimeSeries) => {
         setEuriborTimeSeries(updatedEuriborTimeSeries.data);
       })
