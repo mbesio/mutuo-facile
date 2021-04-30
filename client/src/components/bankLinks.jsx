@@ -7,8 +7,7 @@ const BankLinks = () => {
 
 
   useEffect(() => {
-    axios.get('/banklinks') // for development
-    //axios.get('http://143.198.104.94:3010/banklinks') // for production
+    axios.get('/banklinks')
       .then( (banks) => {
         setBanks(banks.data);
       })
