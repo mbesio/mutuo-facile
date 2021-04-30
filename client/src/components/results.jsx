@@ -23,9 +23,9 @@ var Results = (props) => {
       <div className="home-results-inner-wrapper">
         <div className="home-results-title">Riepilogo</div>
         <div className="home-results-inner-inner-wrapper">
-            <div className="home-results-column-wrapper">
-              <div style={{fontSize: '125%', marginBottom: '15px'}}>Parametri</div>
-              <div style={{display: 'flex', alignItems: 'center'}}>
+          <div className="home-results-column-wrapper">
+            <div className="home-results-subtitle">Parametri</div>
+            <div style={{display: 'flex', alignItems: 'center'}}>
                 <AiFillBank style={{margin: '0.4em'}} />
                 <NumberFormat value={props.mutuo.importo} displayType={'text'} thousandSeparator={true} prefix={'€'} />
               </div>
