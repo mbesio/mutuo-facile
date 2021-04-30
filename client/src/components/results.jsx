@@ -19,12 +19,12 @@ var Results = (props) => {
 
 
   return (
-    <div style={{ width: '30%'}}>
-      <div style={{ width: '100%', height:'80%', paddingTop: '5px', paddingLeft: '5%', paddingRight: '5%', backgroundColor: '#e0edff'}}>
-        <div style={{fontSize: '200%', paddingBottom: '10%', marginTop: '0.5em'}}>Riepilogo</div>
-        <div style={{height:'80%', marginTop: '0', display: 'flex', flexDirection: 'row'}}>
-            <div style={{display:'flex', flexDirection: 'column', justifyContent: 'flex-start',marginTop: '1%', marginBottom: '1%', marginRight: '10%'}}>
-              <div style={{fontSize: '150%', marginBottom: '15px'}}>Parametri</div>
+    <div className="home-results-wrapper">
+      <div className="home-results-inner-wrapper">
+        <div className="home-results-title">Riepilogo</div>
+        <div className="home-results-inner-inner-wrapper">
+            <div className="home-results-column-wrapper">
+              <div style={{fontSize: '125%', marginBottom: '15px'}}>Parametri</div>
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <AiFillBank style={{margin: '0.4em'}} />
                 <NumberFormat value={props.mutuo.importo} displayType={'text'} thousandSeparator={true} prefix={'€'} />
@@ -39,7 +39,7 @@ var Results = (props) => {
               </div>
             </div>
             <div style={{display:'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: '1%', marginBottom: '1%', marginRight: '2%'}}>
-              <div style={{fontSize: '150%', marginBottom: '15px'}}>Risultato</div>
+              <div style={{fontSize: '125%', marginBottom: '15px'}}>Risultato</div>
               <div style={{display: 'flex', justifyContent: 'space-between',alignItems: 'center'}}>
                 <div style={{margin: '0.4em'}}>Rata:</div>
                 <NumberFormat style={{fontSize: '200%'}} value={installment} displayType={'text'} thousandSeparator={true} prefix={'€'} />
