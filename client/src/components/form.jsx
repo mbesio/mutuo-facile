@@ -58,7 +58,7 @@ class Modulo extends React.Component {
         <div className="home-heading"></div>
         <div className="home-wrapper">
           <div className="home-form-wrapper">
-            <div className="home-form-header">Modifica parametri mutuo</div>
+            <div className="home-form-header">Calcola la rata del tuo mutuo</div>
             <Form className="home-form-body"
             onSubmit={this.handleSubmit}>
               <Form.Field>

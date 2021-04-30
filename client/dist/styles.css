@@ -6,7 +6,7 @@
 }
 
 .home-heading {
-  padding-top: 1em;
+  padding-top: 3em;
   background-color: white;
 }
 
@@ -19,17 +19,25 @@
   .home-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: flex-start;
   }
 }
 
 .home-form-wrapper {
-  width: "30%";
-  margin-right: "10%";
+  width: 30%;
+  margin-right: 10%;
+}
+
+@media only screen and (max-width: 800px) {
+  .home-form-wrapper {
+    width: 60%;
+    margin-right: 20%;
+    margin-left: 20%;
+  }
 }
 
 .home-form-header {
-  font-size: 200%;
+  font-size: 150%;
   padding-bottom: 5px;
   margin-right: 1%;
   margin-top: 0.5em;
