@@ -45,3 +45,50 @@
   display: flex;
   align-items: center;
 }
+
+.navbar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.navbar-left-wrapper {
+  display: flex;
+  color: rgba(255, 255, 255, 0.605);
+}
+
+.navbar-homenavigation-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-homenavigation-icon {
+  font-size: 250%;
+  padding-right: 10px;
+}
+
+.navbar-right-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #2485d0;
+  padding: 0.5em;
+}
+
+.navbar-link-styles {
+  text-align: center;
+  padding: 0px 10px;
+  font-size: 1.5em;
+}
+
+a.navbar-link-styles {
+  color: #2485d0;
+}
+
+a.navbar-link-styles:hover {
+  color: #5dade9;
+  cursor: pointer;
+}

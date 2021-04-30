@@ -1,34 +1,40 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import { RiHomeGearFill } from 'react-icons/ri';
-import NavBar from './navBar.jsx';
 
 
 var Header = () => {
-  const [isHeaderHovered, setHeaderIsHovered] = useState(false);
-
-  const toggleHoverHeader = () => {
-    setHeaderIsHovered(!isHeaderHovered);
-  }
-
-  var headerLinkStyle = isHeaderHovered ? {textAlign: 'center', color: '#e0edff', cursor: 'pointer'} : {textAlign: 'center', color: 'white'}
-
 
   return (
-    <div style={{position: 'sticky', top: '0', zIndex: '1'}}>
-      <div style={{padding: '2.0em', backgroundColor: '#2485D0', color: 'white', textAlign: 'center'}}>
+    <div className="navbar-wrapper">
+      <div className="navbar-left-wrapper">
+        <Link
+          to="/"
+          className="navbar-link-styles"
+          >
+          <div className="navbar-homenavigation-wrapper">
+            <RiHomeGearFill className="navbar-homenavigation-icon" />
+            <div>Mutuo Facile</div>
+          </div>
+        </Link>
+      </div>
+      <div className="navbar-right-wrapper">
       <Link
         to="/"
-        style={headerLinkStyle}
-        onMouseEnter = {() => toggleHoverHeader()}
-        onMouseLeave = {() => toggleHoverHeader()}
-        >
-        <RiHomeGearFill style={{fontSize: '300%'}} />
-        <div style={{ fontSize: '200%'}}>Mutuo Facile</div>
-        <div style={{paddingTop: '0.5em', fontStyle: 'italic'}}>Calcola la rata del mutuo</div>
+        className = "navbar-link-styles"
+        >Home
       </Link>
-      </div>
-      <NavBar/>
+      <Link
+        to="/banche"
+        className = "navbar-link-styles"
+        >Banche
+      </Link>
+      <Link
+        to="/tassi"
+        className = "navbar-link-styles"
+        >Tassi
+      </Link>
+    </div>
     </div>
   )
 }
