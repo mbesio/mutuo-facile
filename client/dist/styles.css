@@ -148,3 +148,9 @@ a.navbar-link-styles:hover {
   font-size: 125%;
   margin-bottom: 15px;
 }
+
+.home-results-parameters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
