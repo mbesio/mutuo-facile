@@ -3,6 +3,7 @@ import { Button, Checkbox, Form } from 'semantic-ui-react';
 
 import Results from './results.jsx';
 import SummaryTable from './summaryTable.jsx';
+import ResponsiveFrom from './responsiveFrom.jsx';
 
 import inputValidation from '../lib/inputvalidation.js';
 
@@ -10,16 +11,20 @@ class Modulo extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
+      isEditingImporto: false,
       importo: 200000,
       tasso: 2.5,
       durata: 30,
-      tempImporto: 200000,
+      tempImporto: '',
       tempTasso: 2.50,
       tempDurata: 30,
       errorMessage: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.toggleEditing = this.toggleEditing.bind(this);
+    this.toCurrency = this.toCurrency.bind(this);
+    this.toFormattedNumber = this.toFormattedNumber.bind(this);
   }
 
   handleSubmit(e) {
@@ -43,13 +48,40 @@ class Modulo extends React.Component {
     }
   }
 
+  toggleEditing() {
+    this.setState({ isEditingImporto: !this.state.isEditingImporto });
+  }
+
   handleInputChange(e) {
-    var updatedInputStepOne = inputValidation.parseInput(e.target.value);
-    var updatedInput = inputValidation.parsePercentage(updatedInputStepOne);
+    // var updatedInputStepOne = inputValidation.parseInput(e.target.value);
+    // var updatedInput = inputValidation.parsePercentage(updatedInputStepOne);
+    let formattedNumber = e.target.value.replace(/\D/g,'');
+
+    // set the maximum input to 10 million
+    if(formattedNumber > 10000000) {
+      formattedNumber = 10000000;
+    }
 
     this.setState({
-      [e.target.name]: parseFloat(updatedInput)
+      [e.target.name]: formattedNumber
     })
+  }
+
+  toFormattedNumber(number) {
+    const formatter = new Intl.NumberFormat("it-IT", {
+      minimumFractionDigits: 0
+    });
+    return formatter.format(number);
+
+  }
+
+  toCurrency(number) {
+    const formatter = new Intl.NumberFormat("it-IT", {
+      style: "currency",
+      currency: "EUR",
+      minimumFractionDigits: 0
+    });
+    return formatter.format(number);
   }
 
   render() {
@@ -63,23 +95,39 @@ class Modulo extends React.Component {
             onSubmit={this.handleSubmit}>
               <Form.Field>
                 <label>Importo (€)</label>
-                  <input
-                    name='tempImporto'
-                    defaultValue={this.state.tempImporto}
-                    onChange={this.handleInputChange}/>
+                  { this.state.isEditingImporto ? (
+                    <input
+                      type = "text"
+                      name='tempImporto'
+                      value={this.state.tempImporto === '' ? '' : this.toFormattedNumber(this.state.tempImporto)}
+                      onChange={this.handleInputChange}
+                      onBlur={this.toggleEditing}
+                    />
+                  ) : (
+                    <input
+                      type = "text"
+                      name='tempImporto'
+                      placeholder = "200.000 €"
+                      value={this.state.tempImporto === '' ? '' : this.toCurrency(this.state.tempImporto)}
+                      onFocus={this.toggleEditing}
+                      readOnly
+                    />
+                  )}
               </Form.Field>
               <Form.Field>
                 <label>Tasso d'interesse (%)</label>
                   <input
-                    defaultValue={this.state.tempTasso}
+
                     name='tempTasso'
+                    defaultValue={this.state.tempTasso}
                     onChange={this.handleInputChange}/>
               </Form.Field>
               <Form.Field>
                 <label>Durata (anni)</label>
                   <input
-                    defaultValue={this.state.tempDurata}
+
                     name='tempDurata'
+                    defaultValue={this.state.tempDurata}
                     onChange={this.handleInputChange}/>
               </Form.Field>
               <div className="home-form-button">
@@ -90,7 +138,8 @@ class Modulo extends React.Component {
           </div>
           <Results mutuo={this.state}/>
         </div>
-        <SummaryTable mutuo = {this.state}/>
+        {/* <SummaryTable mutuo = {this.state}/> */}
+        <ResponsiveFrom/>
       </div>
     )
   }
