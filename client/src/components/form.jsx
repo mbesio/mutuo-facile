@@ -12,6 +12,7 @@ class Modulo extends React.Component {
     super (props);
     this.state = {
       isEditingImporto: false,
+      isEditingTasso: false,
       importo: 200000,
       tasso: 2.5,
       durata: 30,
@@ -22,7 +23,8 @@ class Modulo extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.toggleEditing = this.toggleEditing.bind(this);
+    this.handleInputChangeImporto = this.handleInputChangeImporto.bind(this);
+    this.toggleEditingImporto = this.toggleEditingImporto.bind(this);
     this.toCurrency = this.toCurrency.bind(this);
     this.toFormattedNumber = this.toFormattedNumber.bind(this);
   }
@@ -48,16 +50,28 @@ class Modulo extends React.Component {
     }
   }
 
-  toggleEditing() {
+  toggleEditingImporto() {
     this.setState({ isEditingImporto: !this.state.isEditingImporto });
   }
 
-  handleInputChange(e) {
+  handleInputChangeImporto(e) {
     // var updatedInputStepOne = inputValidation.parseInput(e.target.value);
     // var updatedInput = inputValidation.parsePercentage(updatedInputStepOne);
     let formattedNumber = e.target.value.replace(/\D/g,'');
 
     // set the maximum input to 10 million
+    if(formattedNumber > 10000000) {
+      formattedNumber = 10000000;
+    }
+
+    this.setState({
+      [e.target.name]: formattedNumber
+    })
+  }
+
+  handleInputChange(e) {
+    let formattedNumber = e.target.value.replace(/\D/g,'');
+
     if(formattedNumber > 10000000) {
       formattedNumber = 10000000;
     }
@@ -100,8 +114,8 @@ class Modulo extends React.Component {
                       type = "text"
                       name='tempImporto'
                       value={this.state.tempImporto === '' ? '' : this.toFormattedNumber(this.state.tempImporto)}
-                      onChange={this.handleInputChange}
-                      onBlur={this.toggleEditing}
+                      onChange={this.handleInputChangeImporto}
+                      onBlur={this.toggleEditingImporto}
                     />
                   ) : (
                     <input
@@ -109,7 +123,7 @@ class Modulo extends React.Component {
                       name='tempImporto'
                       placeholder = "200.000 €"
                       value={this.state.tempImporto === '' ? '' : this.toCurrency(this.state.tempImporto)}
-                      onFocus={this.toggleEditing}
+                      onFocus={this.toggleEditingImporto}
                       readOnly
                     />
                   )}
