@@ -14,18 +14,21 @@ class Modulo extends React.Component {
       isEditingImporto: false,
       isEditingTasso: false,
       importo: 200000,
-      tasso: 2.5,
+      tasso: 0.025,
       durata: 30,
       tempImporto: '',
-      tempTasso: 2.50,
+      tempTasso: '',
       tempDurata: 30,
       errorMessage: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputChangeImporto = this.handleInputChangeImporto.bind(this);
+    this.handleInputChangeTasso = this.handleInputChangeTasso.bind(this);
     this.toggleEditingImporto = this.toggleEditingImporto.bind(this);
+    this.toggleEditingTasso = this.toggleEditingTasso.bind(this);
     this.toCurrency = this.toCurrency.bind(this);
+    this.toPercentage = this.toPercentage.bind(this);
     this.toFormattedNumber = this.toFormattedNumber.bind(this);
   }
 
@@ -54,14 +57,60 @@ class Modulo extends React.Component {
     this.setState({ isEditingImporto: !this.state.isEditingImporto });
   }
 
+  toggleEditingTasso() {
+    this.setState({ isEditingTasso: !this.state.isEditingTasso });
+  }
+
   handleInputChangeImporto(e) {
-    // var updatedInputStepOne = inputValidation.parseInput(e.target.value);
-    // var updatedInput = inputValidation.parsePercentage(updatedInputStepOne);
     let formattedNumber = e.target.value.replace(/\D/g,'');
 
-    // set the maximum input to 10 million
     if(formattedNumber > 10000000) {
       formattedNumber = 10000000;
+    }
+
+    console.log('e.target.name ', e.target.name)
+    console.log('state of e.target.name ', this.state.tempImporto)
+
+    this.setState({
+      [e.target.name]: formattedNumber
+    })
+  }
+
+  handleInputChangeTasso(e) {
+    let formattedNumber = e.target.value.replace(/[^\d,]/g,'');
+    console.log('formattedNumber 1', formattedNumber)
+
+   // formattedNumber = formattedNumber.replace(/,*,/g,',')
+    formattedNumber = formattedNumber.split("").filter((item, index, array) => {
+      return(item !== ','|| (item === ',' && array.indexOf(item) === index) )
+      }).join("")
+    console.log('formattedNumber 2', formattedNumber)
+
+    // add function to have max two digits before and two digits after comma
+    let indexOfComma = formattedNumber.indexOf(',')
+    let lengthOfFormattedNumeber = formattedNumber.length
+    let formattedNumberBeforeComma = ''
+    let formattedNumberAfterComma = ''
+    if (indexOfComma === -1) {
+      formattedNumberBeforeComma = formattedNumber.substring(0,2)
+      formattedNumber = `${formattedNumberBeforeComma}`
+      console.log('hello 1')
+    } else if(indexOfComma === lengthOfFormattedNumeber-1) {
+      formattedNumber = `${formattedNumber}`
+      console.log('hello 2')
+    } else {
+      if (indexOfComma >= 2) {
+        formattedNumberBeforeComma = formattedNumber.substring(0,2)
+      } else if (indexOfComma === 1) {
+        formattedNumberBeforeComma = formattedNumber.substring(0,1)
+      } else if(indexOfComma === 0) {
+        formattedNumberBeforeComma = '0'
+      }
+      console.log('formattedNumberBeforeComma ', formattedNumberBeforeComma)
+      formattedNumberAfterComma = formattedNumber.substring(indexOfComma+1, indexOfComma +3)
+      console.log('formattedNumberAfterComma ', formattedNumberAfterComma)
+      formattedNumber = `${formattedNumberBeforeComma},${formattedNumberAfterComma}`
+      console.log('hello 3')
     }
 
     this.setState({
@@ -86,7 +135,6 @@ class Modulo extends React.Component {
       minimumFractionDigits: 0
     });
     return formatter.format(number);
-
   }
 
   toCurrency(number) {
@@ -96,6 +144,20 @@ class Modulo extends React.Component {
       minimumFractionDigits: 0
     });
     return formatter.format(number);
+  }
+
+  toPercentage(number) {
+    let numberPercentage = parseFloat(number.replace(',', '.'))/100;
+    const formatter = new Intl.NumberFormat("it-IT", {
+      style: 'percent',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
+    console.log('number ', numberPercentage)
+    console.log('formatted ', formatter.format(numberPercentage))
+
+    return formatter.format(numberPercentage);
   }
 
   render() {
@@ -130,11 +192,24 @@ class Modulo extends React.Component {
               </Form.Field>
               <Form.Field>
                 <label>Tasso d'interesse (%)</label>
-                  <input
-
-                    name='tempTasso'
-                    defaultValue={this.state.tempTasso}
-                    onChange={this.handleInputChange}/>
+                { this.state.isEditingTasso ? (
+                    <input
+                      type = "text"
+                      name='tempTasso'
+                      value={this.state.tempTasso === '' ? '' : this.state.tempTasso}
+                      onChange={this.handleInputChangeTasso}
+                      onBlur={this.toggleEditingTasso}
+                    />
+                  ) : (
+                    <input
+                      type = "text"
+                      name='tempTasso'
+                      placeholder = "2,5 %"
+                      value={this.state.tempTasso === '' ? '' : this.toPercentage(this.state.tempTasso)}
+                      onFocus={this.toggleEditingTasso}
+                      readOnly
+                    />
+                  )}
               </Form.Field>
               <Form.Field>
                 <label>Durata (anni)</label>
