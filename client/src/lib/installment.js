@@ -1,5 +1,3 @@
-// functions to calculate mortgage parmaeters
-
 // function to calculate the installment amount
 var monthlyInstallment = (importo, tasso, durata) => {
   var tassoPercentage = tasso/100;

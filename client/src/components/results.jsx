@@ -7,11 +7,11 @@ import NumberFormat from 'react-number-format';
 
 import monthlyInstallment from '../lib/installment.js';
 
-var Results = (props) => {
+var Results = ({importo, tasso, durata}) => {
 
-  var installment = monthlyInstallment(props.mutuo.importo, props.mutuo.tasso, props.mutuo.durata);
-  var totalCost = installment * 12 * props.mutuo.durata;
-  var interestPercentage = (totalCost - props.mutuo.importo) / totalCost * 100;
+  var installment = monthlyInstallment(importo, tasso, durata);
+  var totalCost = installment * 12 * durata;
+  var interestPercentage = (totalCost - importo) / totalCost * 100;
 
   var totalCostDisplay = totalCost.toFixed(2);
   var interestPercentageDisplay = interestPercentage.toFixed(1);
@@ -27,15 +27,15 @@ var Results = (props) => {
             <div className="home-results-subtitle">Parametri</div>
             <div className="home-results-parameters">
                 <AiFillBank style={{margin: '0.4em'}} />
-                <NumberFormat value={props.mutuo.importo} displayType={'text'} thousandSeparator={true} prefix={'€'} />
+                <NumberFormat value={importo} displayType={'text'} thousandSeparator={true} prefix={'€'} />
               </div>
               <div className="home-results-parameters">
                 <AiOutlinePercentage style={{margin: '0.4em'}} />
-                <div>{props.mutuo.tasso}%</div>
+                <div>{tasso}%</div>
               </div>
               <div className="home-results-parameters">
                 <ImCalendar style={{margin: '0.4em'}}/>
-                <div>{props.mutuo.durata} anni</div>
+                <div>{durata} anni</div>
               </div>
             </div>
             <div className="home-results-column-wrapper">

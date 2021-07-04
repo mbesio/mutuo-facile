@@ -6,6 +6,7 @@ import SummaryTable from './summaryTable.jsx';
 import ResponsiveFrom from './responsiveFrom.jsx';
 
 import inputValidation from '../lib/inputvalidation.js';
+import { convertPercentageNumberFormatFromEuToUs } from '../lib/inputvalidation.js'
 
 class Modulo extends React.Component {
   constructor (props) {
@@ -14,7 +15,7 @@ class Modulo extends React.Component {
       isEditingImporto: false,
       isEditingTasso: false,
       importo: 200000,
-      tasso: 0.025,
+      tasso: 2.5,
       durata: 30,
       tempImporto: '',
       tempTasso: '',
@@ -44,6 +45,12 @@ class Modulo extends React.Component {
       this.setState({
         errorMessage: 'Tutti i parametri devono essere numerici'
       })
+
+      console.log('this.state.tempImporto ', this.state.tempImporto)
+      console.log('this.state.tempTasso ', this.state.tempTasso)
+      console.log('this.state.tempDurata ', this.state.tempDurata)
+
+
     } else {
       this.setState({
         importo: this.state.tempImporto,
@@ -68,9 +75,6 @@ class Modulo extends React.Component {
       formattedNumber = 10000000;
     }
 
-    console.log('e.target.name ', e.target.name)
-    console.log('state of e.target.name ', this.state.tempImporto)
-
     this.setState({
       [e.target.name]: formattedNumber
     })
@@ -78,15 +82,11 @@ class Modulo extends React.Component {
 
   handleInputChangeTasso(e) {
     let formattedNumber = e.target.value.replace(/[^\d,]/g,'');
-    console.log('formattedNumber 1', formattedNumber)
 
-   // formattedNumber = formattedNumber.replace(/,*,/g,',')
     formattedNumber = formattedNumber.split("").filter((item, index, array) => {
       return(item !== ','|| (item === ',' && array.indexOf(item) === index) )
       }).join("")
-    console.log('formattedNumber 2', formattedNumber)
 
-    // add function to have max two digits before and two digits after comma
     let indexOfComma = formattedNumber.indexOf(',')
     let lengthOfFormattedNumeber = formattedNumber.length
     let formattedNumberBeforeComma = ''
@@ -94,10 +94,10 @@ class Modulo extends React.Component {
     if (indexOfComma === -1) {
       formattedNumberBeforeComma = formattedNumber.substring(0,2)
       formattedNumber = `${formattedNumberBeforeComma}`
-      console.log('hello 1')
+
     } else if(indexOfComma === lengthOfFormattedNumeber-1) {
       formattedNumber = `${formattedNumber}`
-      console.log('hello 2')
+
     } else {
       if (indexOfComma >= 2) {
         formattedNumberBeforeComma = formattedNumber.substring(0,2)
@@ -106,11 +106,11 @@ class Modulo extends React.Component {
       } else if(indexOfComma === 0) {
         formattedNumberBeforeComma = '0'
       }
-      console.log('formattedNumberBeforeComma ', formattedNumberBeforeComma)
+
       formattedNumberAfterComma = formattedNumber.substring(indexOfComma+1, indexOfComma +3)
-      console.log('formattedNumberAfterComma ', formattedNumberAfterComma)
+
       formattedNumber = `${formattedNumberBeforeComma},${formattedNumberAfterComma}`
-      console.log('hello 3')
+
     }
 
     this.setState({
@@ -121,8 +121,8 @@ class Modulo extends React.Component {
   handleInputChange(e) {
     let formattedNumber = e.target.value.replace(/\D/g,'');
 
-    if(formattedNumber > 10000000) {
-      formattedNumber = 10000000;
+    if(formattedNumber > 50) {
+      formattedNumber = 50;
     }
 
     this.setState({
