@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import Header from './components/header.jsx';
-import Modulo from './components/form.jsx';
+import ResponsiveForm from './components/responsiveForm.jsx';
 import BankLinks from './components/bankLinks.jsx';
 import InterestRateLinks from './components/interestRateLinks.jsx';
 import Footer from './components/footer.jsx';
@@ -26,7 +26,7 @@ var App = () => {
               <InterestRateLinks/>
             </Route>
             <Route path="/">
-              <Modulo/>
+              <ResponsiveForm/>
             </Route>
           </Switch>
         <Footer/>

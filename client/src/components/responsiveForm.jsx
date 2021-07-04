@@ -8,9 +8,10 @@ import inputValidation from '../lib/inputvalidation.js';
 import { convertPercentageNumberFormatFromEuToUs } from '../lib/inputvalidation.js'
 
 
-var ResponsiveFrom = () => {
+var ResponsiveForm = () => {
   const [isEditingImporto, setIsEditingImporto] = useState(false)
   const [isEditingTasso, setIsEditingTasso] = useState(false)
+  const [isEditingDurata, setIsEditingDurata] = useState(false)
 
   const [importo, setImporto] = useState(200000)
   const [tasso, setTasso] = useState(2.5)
@@ -18,17 +19,22 @@ var ResponsiveFrom = () => {
 
   const [tempImporto, setTempImporto] = useState('')
   const [tempTasso, setTempTasso] = useState('')
-  const [tempDurata, setTempDurata] = useState(30)
+  const [tempDurata, setTempDurata] = useState('')
 
   const [displayImporto, setDisplayImporto] = useState(0)
   const [displayTasso, setDisplayTasso] = useState(0)
+  const [displayDurata, setDisplayDurata] = useState(0)
 
   const [isInvalidImportoInput, setIsInvalidImportoInput] = useState(false)
   const [isInvalidTassoInput, setIsInvalidTassoInput] = useState(false)
+  const [isInvalidDurataInput, setIsInvalidDurataInput] = useState(false)
+
 
   const [errorMessage, setErrorMessage] = useState('')
   const [errorMessageImporto, setErrorMessageImporto] = useState('')
   const [errorMessageTasso, setErrorMessageTasso] = useState('')
+  const [errorMessageDurata, setErrorMessageDurata] = useState('')
+
 
   const handleSubmit = (e) => {
 
@@ -57,6 +63,10 @@ var ResponsiveFrom = () => {
 
   const toggleEditingTasso = () => {
     setIsEditingTasso(!isEditingTasso)
+  }
+
+  const toggleEditingDurata = () => {
+    setIsEditingDurata(!isEditingDurata)
   }
 
   const handleInputChangeImporto = (e) => {
@@ -123,6 +133,37 @@ var ResponsiveFrom = () => {
       setErrorMessageTasso('Inserire un valore per il tasso inferiore a 20%')
     }
   }
+
+  const handleInputChangeDurata = (e) => {
+    let currentDurataInput = e.target.value
+    setTempDurata(currentDurataInput)
+
+    const validDigitRegex = new RegExp(/^[0-9]*$/)
+    let isValidInput = validDigitRegex.test(currentDurataInput)
+
+    if (isValidInput) {
+      setIsInvalidDurataInput(false)
+    }
+
+    if (!isValidInput || currentDurataInput[0] === '0') {
+      setIsInvalidDurataInput(true)
+      setDisplayDurata(currentDurataInput)
+      setErrorMessageDurata('Inserire un valore numerico valido per la durata')
+      return
+    }
+
+    const currentNumericDurataInput = parseInt(currentDurataInput)
+
+    setDisplayDurata(currentNumericDurataInput)
+
+    if (currentNumericDurataInput > 40) {
+      setIsInvalidDurataInput(true)
+      setErrorMessageDurata('Inserire un valore per la durata non superiore a 40 anni')
+    }
+  }
+
+
+
 
   const handleInputChange = (e) => {
     let formattedNumber = e.target.value.replace(/\D/g,'');
@@ -213,22 +254,45 @@ var ResponsiveFrom = () => {
                   />
                 ) : (
                   <input
+                    style = {{borderColor: isInvalidTassoInput ? "red" : ""}}
                     type = "text"
                     name='tempTasso'
                     placeholder = "2,5 %"
-                    value={tempTasso === '' ? '' : toPercentage(tempTasso)}
+                    value={(isInvalidTassoInput || tempTasso === '') ? tempTasso : toPercentage(tempTasso)}
                     onFocus={toggleEditingTasso}
                     readOnly
                   />
                 )}
             </Form.Field>
             <Form.Field>
-              <label>Durata (anni)</label>
-                <input
+              <div style = {{display: 'flex', justifyContent: 'space-between'}}>
+                <label>Durata (anni)</label>
+                {isInvalidDurataInput && <span style={{ color: 'red' }}>{errorMessageDurata}</span>}
+              </div>
+              { isEditingDurata ? (
+                  <input
+                    style = {{borderColor: isInvalidDurataInput ? "red" : ""}}
+                    type = "text"
+                    name='tempDurata'
+                    value={tempDurata}
 
-                  name='tempDurata'
-                  defaultValue={tempDurata}
-                  onChange={handleInputChange}/>
+                    //value={tempTasso === '' ? '' : tempTasso}
+                    onChange={handleInputChangeDurata}
+                    onBlur={toggleEditingDurata}
+                  />
+                ) : (
+                  <input
+                    style = {{borderColor: isInvalidDurataInput ? "red" : ""}}
+                    type = "text"
+                    name='tempDurata'
+                    placeholder = "30 anni"
+                    //value={tempDurata}
+                    value={(isInvalidDurataInput || tempDurata === '') ? tempDurata : `${tempDurata} anni`}
+                    //value={tempTasso === '' ? '' : toPercentage(tempTasso)}
+                    onFocus={toggleEditingDurata}
+                    readOnly
+                  />
+                )}
             </Form.Field>
             <div className="home-form-button">
               <Button content='Calcola Rata' primary type='submit'/>
@@ -242,4 +306,4 @@ var ResponsiveFrom = () => {
   )
 }
 
-export default ResponsiveFrom;
+export default ResponsiveForm;
