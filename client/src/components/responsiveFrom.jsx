@@ -21,12 +21,14 @@ var ResponsiveFrom = () => {
   const [tempDurata, setTempDurata] = useState(30)
 
   const [displayImporto, setDisplayImporto] = useState(0)
-
+  const [displayTasso, setDisplayTasso] = useState(0)
 
   const [isInvalidImportoInput, setIsInvalidImportoInput] = useState(false)
+  const [isInvalidTassoInput, setIsInvalidTassoInput] = useState(false)
 
   const [errorMessage, setErrorMessage] = useState('')
   const [errorMessageImporto, setErrorMessageImporto] = useState('')
+  const [errorMessageTasso, setErrorMessageTasso] = useState('')
 
   const handleSubmit = (e) => {
 
@@ -34,17 +36,17 @@ var ResponsiveFrom = () => {
 
     e.preventDefault();
     if( !inputValidation.isInputValid(tempImporto) ||
-        !inputValidation.isInputValid(tempTasso) ||
+        !inputValidation.isInputValid(displayTasso) ||
         !inputValidation.isInputValid(tempDurata) ) {
       setErrorMessage('Tutti i parametri devono essere numerici')
 
       console.log('tempImporto ', tempImporto)
-      console.log('tempTasso ', tempTasso)
+      console.log('displayTasso ', displayTasso)
       console.log('tempDurata ', tempDurata)
 
     } else {
       setImporto(tempImporto)
-      setTasso(tempTasso)
+      setTasso(displayTasso)
       setDurata(tempDurata)
     }
   }
@@ -86,39 +88,40 @@ var ResponsiveFrom = () => {
   }
 
   const handleInputChangeTasso = (e) => {
-    let formattedNumber = e.target.value.replace(/[^\d,]/g,'');
+    let currentTassoInput = e.target.value
+    setTempTasso(currentTassoInput)
 
-    formattedNumber = formattedNumber.split("").filter((item, index, array) => {
-      return(item !== ','|| (item === ',' && array.indexOf(item) === index) )
-      }).join("")
+    const validDigitRegex = new RegExp(/^[-,0-9]+$/)
+    let numberOfCommas = currentTassoInput.split(",").length - 1
 
-    let indexOfComma = formattedNumber.indexOf(',')
-    let lengthOfFormattedNumeber = formattedNumber.length
-    let formattedNumberBeforeComma = ''
-    let formattedNumberAfterComma = ''
-    if (indexOfComma === -1) {
-      formattedNumberBeforeComma = formattedNumber.substring(0,2)
-      formattedNumber = `${formattedNumberBeforeComma}`
-
-    } else if(indexOfComma === lengthOfFormattedNumeber-1) {
-      formattedNumber = `${formattedNumber}`
-
-    } else {
-      if (indexOfComma >= 2) {
-        formattedNumberBeforeComma = formattedNumber.substring(0,2)
-      } else if (indexOfComma === 1) {
-        formattedNumberBeforeComma = formattedNumber.substring(0,1)
-      } else if(indexOfComma === 0) {
-        formattedNumberBeforeComma = '0'
-      }
-
-      formattedNumberAfterComma = formattedNumber.substring(indexOfComma+1, indexOfComma +3)
-
-      formattedNumber = `${formattedNumberBeforeComma},${formattedNumberAfterComma}`
-
+    let isValidInput = validDigitRegex.test(currentTassoInput)
+    if (numberOfCommas > 1) {
+      isValidInput = false
     }
 
-    setTempTasso(formattedNumber)
+    if (currentTassoInput.length === 0) {
+      setIsInvalidTassoInput(false)
+      return
+    }
+
+    if (!isValidInput || currentTassoInput[0] === '0') {
+      setIsInvalidTassoInput(true)
+      setDisplayTasso(currentTassoInput)
+      setErrorMessageTasso('Inserire un valore numerico valido per il tasso')
+      return
+    }
+
+    if (isValidInput) {
+      setIsInvalidTassoInput(false)
+    }
+
+    const currentNumericTassoInput = parseFloat(currentTassoInput.replace(/,/g, '.'))
+    setDisplayTasso(currentNumericTassoInput)
+
+    if (currentNumericTassoInput > 20) {
+      setIsInvalidTassoInput(true)
+      setErrorMessageTasso('Inserire un valore per il tasso inferiore a 20%')
+    }
   }
 
   const handleInputChange = (e) => {
@@ -132,10 +135,7 @@ var ResponsiveFrom = () => {
   }
 
   const toFormattedNumber = (numberString) => {
-    // remove all non digits
-    console.log('numberString ', numberString)
     const numberNumeric = numberString.replace(/\./g,'')
-    console.log('numberNumeric ', numberNumeric)
 
     const formatter = new Intl.NumberFormat("it-IT", {
       minimumFractionDigits: 0
@@ -159,10 +159,6 @@ var ResponsiveFrom = () => {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
-
-    console.log('number ', numberPercentage)
-    console.log('formatted ', formatter.format(numberPercentage))
-
     return formatter.format(numberPercentage);
   }
 
@@ -185,7 +181,6 @@ var ResponsiveFrom = () => {
                     type = "text"
                     name='tempImporto'
                     value={tempImporto}
-                    //value={tempImporto === '' ? '' : toFormattedNumber(tempImporto)}
                     onChange={handleInputChangeImporto}
                     onBlur={toggleEditingImporto}
                   />
@@ -196,19 +191,23 @@ var ResponsiveFrom = () => {
                     name='tempImporto'
                     placeholder = "200.000 €"
                     value={(isInvalidImportoInput || tempImporto === '') ?  tempImporto : toCurrency(displayImporto) }
-                    //value={tempImporto === '' ? '' : toCurrency(tempImporto)}
                     onFocus={toggleEditingImporto}
                     readOnly
                   />
                 )}
             </Form.Field>
             <Form.Field>
-              <label>Tasso d'interesse (%)</label>
+              <div style = {{display: 'flex', justifyContent: 'space-between'}}>
+                <label>Tasso d'interesse (%)</label>
+                {isInvalidTassoInput && <span style={{ color: 'red' }}>{errorMessageTasso}</span>}
+              </div>
               { isEditingTasso ? (
                   <input
+                    style = {{borderColor: isInvalidTassoInput ? "red" : ""}}
                     type = "text"
                     name='tempTasso'
-                    value={tempTasso === '' ? '' : tempTasso}
+                    value={tempTasso}
+                    //value={tempTasso === '' ? '' : tempTasso}
                     onChange={handleInputChangeTasso}
                     onBlur={toggleEditingTasso}
                   />
