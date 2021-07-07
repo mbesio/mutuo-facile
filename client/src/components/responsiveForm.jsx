@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 
 import Results from './results.jsx';
@@ -41,9 +41,9 @@ var ResponsiveForm = () => {
     setErrorMessage('')
 
     e.preventDefault();
-    if( !inputValidation.isInputValid(tempImporto) ||
-        !inputValidation.isInputValid(displayTasso) ||
-        !inputValidation.isInputValid(tempDurata) ) {
+    if (!inputValidation.isInputValid(tempImporto) ||
+      !inputValidation.isInputValid(displayTasso) ||
+      !inputValidation.isInputValid(tempDurata)) {
       setErrorMessage('Tutti i parametri devono essere numerici')
 
       console.log('tempImporto ', tempImporto)
@@ -166,9 +166,9 @@ var ResponsiveForm = () => {
 
 
   const handleInputChange = (e) => {
-    let formattedNumber = e.target.value.replace(/\D/g,'');
+    let formattedNumber = e.target.value.replace(/\D/g, '');
 
-    if(formattedNumber > 50) {
+    if (formattedNumber > 50) {
       formattedNumber = 50;
     }
 
@@ -176,7 +176,7 @@ var ResponsiveForm = () => {
   }
 
   const toFormattedNumber = (numberString) => {
-    const numberNumeric = numberString.replace(/\./g,'')
+    const numberNumeric = numberString.replace(/\./g, '')
 
     const formatter = new Intl.NumberFormat("it-IT", {
       minimumFractionDigits: 0
@@ -194,7 +194,7 @@ var ResponsiveForm = () => {
   }
 
   const toPercentage = (number) => {
-    let numberPercentage = parseFloat(number.replace(',', '.'))/100;
+    let numberPercentage = parseFloat(number.replace(',', '.')) / 100;
     const formatter = new Intl.NumberFormat("it-IT", {
       style: 'percent',
       minimumFractionDigits: 2,
@@ -210,97 +210,95 @@ var ResponsiveForm = () => {
         <div className="home-form-wrapper">
           <div className="home-form-header">Calcola la rata del tuo mutuo</div>
           <Form className="home-form-body"
-          onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}>
             <Form.Field>
-              <div style = {{display: 'flex', justifyContent: 'space-between'}}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <label>Importo (€)</label>
                 {isInvalidImportoInput && <span style={{ color: 'red' }}>{errorMessageImporto}</span>}
               </div>
-                { isEditingImporto ? (
-                  <input
-                    style = {{borderColor: isInvalidImportoInput ? "red" : ""}}
-                    type = "text"
-                    name='tempImporto'
-                    value={tempImporto}
-                    onChange={handleInputChangeImporto}
-                    onBlur={toggleEditingImporto}
-                  />
-                ) : (
-                  <input
-                    style = {{borderColor: isInvalidImportoInput ? "red" : ""}}
-                    type = "text"
-                    name='tempImporto'
-                    placeholder = "200.000 €"
-                    value={(isInvalidImportoInput || tempImporto === '') ?  tempImporto : toCurrency(displayImporto) }
-                    onFocus={toggleEditingImporto}
-                    readOnly
-                  />
-                )}
+              {isEditingImporto ? (
+                <input
+                  style={{ borderColor: isInvalidImportoInput ? "red" : "" }}
+                  type="text"
+                  name='tempImporto'
+                  value={tempImporto}
+                  onChange={handleInputChangeImporto}
+                  onBlur={toggleEditingImporto}
+                  readOnly={false}
+                />
+              ) : (
+                <input
+                  style={{ borderColor: isInvalidImportoInput ? "red" : "" }}
+                  type="text"
+                  name='tempImporto'
+                  placeholder="200.000 €"
+                  value={(isInvalidImportoInput || tempImporto === '') ? tempImporto : toCurrency(displayImporto)}
+                  onFocus={toggleEditingImporto}
+                  readOnly={true}
+                />
+              )}
             </Form.Field>
             <Form.Field>
-              <div style = {{display: 'flex', justifyContent: 'space-between'}}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <label>Tasso d'interesse (%)</label>
                 {isInvalidTassoInput && <span style={{ color: 'red' }}>{errorMessageTasso}</span>}
               </div>
-              { isEditingTasso ? (
-                  <input
-                    style = {{borderColor: isInvalidTassoInput ? "red" : ""}}
-                    type = "text"
-                    name='tempTasso'
-                    value={tempTasso}
-                    //value={tempTasso === '' ? '' : tempTasso}
-                    onChange={handleInputChangeTasso}
-                    onBlur={toggleEditingTasso}
-                  />
-                ) : (
-                  <input
-                    style = {{borderColor: isInvalidTassoInput ? "red" : ""}}
-                    type = "text"
-                    name='tempTasso'
-                    placeholder = "2,5 %"
-                    value={(isInvalidTassoInput || tempTasso === '') ? tempTasso : toPercentage(tempTasso)}
-                    onFocus={toggleEditingTasso}
-                    readOnly
-                  />
-                )}
+              {isEditingTasso ? (
+                <input
+                  style={{ borderColor: isInvalidTassoInput ? "red" : "" }}
+                  type="text"
+                  name='tempTasso'
+                  value={tempTasso}
+                  onChange={handleInputChangeTasso}
+                  onBlur={toggleEditingTasso}
+                  readOnly={false}
+                />
+              ) : (
+                <input
+                  style={{ borderColor: isInvalidTassoInput ? "red" : "" }}
+                  type="text"
+                  name='tempTasso'
+                  placeholder="2,5 %"
+                  value={(isInvalidTassoInput || tempTasso === '') ? tempTasso : toPercentage(tempTasso)}
+                  onFocus={toggleEditingTasso}
+                  readOnly={true}
+                />
+              )}
             </Form.Field>
             <Form.Field>
-              <div style = {{display: 'flex', justifyContent: 'space-between'}}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <label>Durata (anni)</label>
                 {isInvalidDurataInput && <span style={{ color: 'red' }}>{errorMessageDurata}</span>}
               </div>
-              { isEditingDurata ? (
-                  <input
-                    style = {{borderColor: isInvalidDurataInput ? "red" : ""}}
-                    type = "text"
-                    name='tempDurata'
-                    value={tempDurata}
-
-                    //value={tempTasso === '' ? '' : tempTasso}
-                    onChange={handleInputChangeDurata}
-                    onBlur={toggleEditingDurata}
-                  />
-                ) : (
-                  <input
-                    style = {{borderColor: isInvalidDurataInput ? "red" : ""}}
-                    type = "text"
-                    name='tempDurata'
-                    placeholder = "30 anni"
-                    //value={tempDurata}
-                    value={(isInvalidDurataInput || tempDurata === '') ? tempDurata : `${tempDurata} anni`}
-                    //value={tempTasso === '' ? '' : toPercentage(tempTasso)}
-                    onFocus={toggleEditingDurata}
-                    readOnly
-                  />
-                )}
+              {isEditingDurata ? (
+                <input
+                  style={{ borderColor: isInvalidDurataInput ? "red" : "" }}
+                  type="text"
+                  name='tempDurata'
+                  value={tempDurata}
+                  onChange={handleInputChangeDurata}
+                  onBlur={toggleEditingDurata}
+                  readOnly={false}
+                />
+              ) : (
+                <input
+                  style={{ borderColor: isInvalidDurataInput ? "red" : "" }}
+                  type="text"
+                  name='tempDurata'
+                  placeholder="30 anni"
+                  value={(isInvalidDurataInput || tempDurata === '') ? tempDurata : `${tempDurata} anni`}
+                  onFocus={toggleEditingDurata}
+                  readOnly={true}
+                />
+              )}
             </Form.Field>
             <div className="home-form-button">
-              <Button content='Calcola Rata' primary type='submit'/>
-              <div style={{color: 'red'}}>{errorMessage}</div>
+              <Button content='Calcola Rata' primary type='submit' />
+              <div style={{ color: 'red' }}>{errorMessage}</div>
             </div>
           </Form>
         </div>
-        <Results importo={importo} tasso={tasso} durata={durata}/>
+        <Results importo={importo} tasso={tasso} durata={durata} />
       </div>
     </div>
   )
